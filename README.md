@@ -553,7 +553,7 @@ The `InputValidator` class ensures data integrity:
 
 This project is open-source and available for educational purposes.
 
-## 👥 Author
+## 👥 Author: Fadi Yosef
 
 Built with ❤️ using Java SE, JDBC, and MySQL
 
