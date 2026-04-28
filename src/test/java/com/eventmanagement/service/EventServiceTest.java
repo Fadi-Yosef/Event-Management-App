@@ -47,8 +47,9 @@ class EventServiceTest {
 
     @Test
     void testCreateEventWithInvalidCapacity() {
-        Event invalidEvent = new Event("Invalid", LocalDate.now(), "Loc", 0, "Desc");
-        assertThrows(IllegalArgumentException.class, () -> eventService.createEvent(invalidEvent));
+        // Event constructor throws IllegalArgumentException for capacity <= 0
+        assertThrows(IllegalArgumentException.class, () -> 
+            new Event("Invalid", LocalDate.now(), "Loc", 0, "Desc"));
         verify(eventRepository, never()).save(any());
     }
 
@@ -61,8 +62,9 @@ class EventServiceTest {
 
     @Test
     void testUpdateEventWithInvalidCapacity() {
-        Event invalidEvent = new Event(1, "Invalid", LocalDate.now(), "Loc", -1, "Desc");
-        assertThrows(IllegalArgumentException.class, () -> eventService.updateEvent(invalidEvent));
+        // Event constructor throws IllegalArgumentException for capacity <= 0
+        assertThrows(IllegalArgumentException.class, () -> 
+            new Event(1, "Invalid", LocalDate.now(), "Loc", -1, "Desc"));
         verify(eventRepository, never()).update(any());
     }
 

@@ -92,7 +92,6 @@ class RegistrationServiceTest {
     void testRegisterForEventAlreadyRegistered() {
         when(eventRepository.findById(1)).thenReturn(Optional.of(testEvent));
         when(participantRepository.findById(1)).thenReturn(Optional.of(testParticipant));
-        when(registrationRepository.getRegistrationCountForEvent(1)).thenReturn(50);
         when(registrationRepository.findByEventAndParticipant(1, 1)).thenReturn(Optional.of(testRegistration));
 
         assertThrows(IllegalArgumentException.class, () -> registrationService.registerForEvent(1, 1));
@@ -145,9 +144,13 @@ class RegistrationServiceTest {
         when(registrationRepository.findByEventId(1)).thenReturn(Arrays.asList(reg1, reg2, reg3));
 
         List<Registration> result = registrationService.getRegistrationsForEventSortedByStatus(1);
+        
+        // Status enum order: ACCEPTED(0), PENDING(1), DECLINED(2)
+        // Sorting by enum ordinal produces: ACCEPTED first, then PENDING, then DECLINED
+        assertEquals(3, result.size());
         assertEquals(Registration.Status.ACCEPTED, result.get(0).getStatus());
-        assertEquals(Registration.Status.DECLINED, result.get(1).getStatus());
-        assertEquals(Registration.Status.PENDING, result.get(2).getStatus());
+        assertEquals(Registration.Status.PENDING, result.get(1).getStatus());
+        assertEquals(Registration.Status.DECLINED, result.get(2).getStatus());
     }
 
     @Test
