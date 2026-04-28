@@ -551,11 +551,8 @@ The `InputValidator` class ensures data integrity:
 
 ## 📄 License
 
-This project is open-source and available for educational purposes.
-
-
-Built with ❤️ using Java SE, JDBC, and MySQL
+Built with  using Java SE, JDBC, and MySQL
 
 ---
 
-**Happy Coding!** 🎉
+Author: Fadi Yosef
